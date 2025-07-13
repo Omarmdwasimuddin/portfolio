@@ -25,5 +25,5 @@ export async function middleware(req) {
 }
 
 export const config = {
-  matcher: ["/dashboard", "/api/private/:path*"], // Add other protected routes here
+  matcher: ["/dashboard"], // Add other protected routes here
 };
