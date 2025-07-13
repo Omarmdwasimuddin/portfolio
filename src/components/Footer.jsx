@@ -1,8 +1,42 @@
+'use client'
+import React, {useState} from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { FaFacebookF, FaTwitter, FaLinkedinIn, FaGithub } from 'react-icons/fa';
+import {ErrorToast, IsEmail, SuccessToast} from "@/utility/FormHelper";
+import Button from "@/components/Button";
 
 const Footer = () => {
+
+    let [data,setData]=useState({email:""})
+    let [submit,setSubmit]=useState(false)
+
+    const inputOnChange = (name,value) => {
+      setData((data)=>({
+              ...data,
+              [name]: value
+          }))
+    }
+
+    const formSubmit=async ()=>{
+        if(IsEmail(data.email)){
+            ErrorToast("Valid Email Address Required!")
+        }else {
+            setSubmit(true);
+            const options={method:'POST', body:JSON.stringify(data)}
+            let res=await (await fetch("/api/newsletter",options)).json();
+            setSubmit(false);
+            setData({email:""})
+
+            res['status']==="success"?(
+                SuccessToast("Request Success")
+            ):(ErrorToast("Email Already Used ! "))
+
+
+        }
+
+    }
+
   return (
     <footer className="bg-gray-900 text-gray-300 pt-16 pb-8 px-6">
       <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -62,13 +96,14 @@ const Footer = () => {
           </p>
           <div className="flex flex-col gap-3">
             <input 
+              value={data.email} onChange={(e)=>{inputOnChange('email',e.target.value)}}
               type="email" 
               placeholder="Email Address *" 
               className="bg-gray-800 text-white px-4 py-2 rounded-sm focus:outline-none focus:ring-1 focus:ring-green-500"
             />
-            <button className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-sm transition-colors">
+            <Button onClick={formSubmit} submit={submit} text="Submit" className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-sm transition-colors">
               Subscribe
-            </button>
+            </Button>
           </div>
         </div>
       </div>

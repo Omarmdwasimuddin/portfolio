@@ -8,34 +8,8 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper/modules';
 import 'swiper/css';
 
-const blogs = [
-  {
-    id: 1,
-    title: 'How I Built a News Portal with Next.js & Prisma',
-    summary: 'A step-by-step breakdown of my experience building a full-stack news platform using modern technologies.',
-    date: 'July 1, 2025',
-    slug: '/blogs/news-portal-nextjs',
-    image: '/Img/projects/newsportal.png',
-  },
-  {
-    id: 2,
-    title: 'Blood Donation App: Building for Social Good',
-    summary: 'I share my journey of building a life-saving app using filters, location search, and authentication.',
-    date: 'June 25, 2025',
-    slug: '#',
-    image: '/Img/projects/bloodDonation.png',
-  },
-  {
-    id: 3,
-    title: 'Next.js vs Traditional React: What I Learned',
-    summary: 'A comparison from a developer perspective after switching from CRA to Next.js.',
-    date: 'June 15, 2025',
-    slug: '#',
-    image: '/Img/projects/dineSmart.png',
-  },
-];
 
-const BlogSection = () => {
+const BlogSection = (props) => {
   return (
     <motion.section
       id="blog"
@@ -64,24 +38,24 @@ const BlogSection = () => {
             1024: { slidesPerView: 3 },
           }}
         >
-          {blogs.map((blog) => (
-            <SwiperSlide key={blog.id}>
-              <div className="bg-gray-300 rounded-xl shadow-md hover:shadow-lg transition-all overflow-hidden">
+          {props.blogpost.map((item,i) => (
+            <SwiperSlide key={i}>
+              <div className="bg-gray-900 rounded-xl shadow-md hover:shadow-lg transition-all overflow-hidden">
                 <div className="relative w-full h-48 group overflow-hidden">
                   <Image
-                    src={blog.image}
-                    alt={blog.title}
+                    src={item['image']}
+                    alt={item['title']}
                     fill
                     className="object-cover transform group-hover:scale-110 transition duration-500"
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   />
                 </div>
                 <div className="p-5">
-                  <p className="text-sm text-gray-600 mb-2">{blog.date}</p>
-                  <h3 className="text-xl font-semibold mb-3 text-gray-800">{blog.title}</h3>
-                  <p className="text-gray-700 mb-4 text-sm">{blog.summary}</p>
+                  <p className="text-sm text-white mb-2">{item['data']}</p>
+                  <h3 className="text-xl font-semibold mb-3 text-gray-100">{item['title']}</h3>
+                  <p className="text-gray-100 mb-4 text-sm">{item['summary']}</p>
                   <Link
-                    href={blog.slug}
+                    href={item['slug']}
                     className="inline-block text-green-600 font-semibold hover:underline text-sm"
                   >
                     Read More →

@@ -18,13 +18,13 @@ const AboutSection = () => {
         {/* Left - Image */}
         <div
           data-aos="fade-right"
-          className="w-[260px] h-[260px] sm:w-[300px] sm:h-[300px] md:w-[360px] md:h-[360px] relative rounded-xl overflow-hidden shadow-lg"
+          className="w-[200px] h-[200px] sm:w-[240px] sm:h-[240px] md:w-[280px] md:h-[280px] relative rounded-xl overflow-hidden shadow-lg"
         >
           <Image
             src="/Img/Wasim.png"
             alt="Wasim"
             fill
-            className="object-cover"
+            className="object-cover object-top"
             priority
           />
         </div>

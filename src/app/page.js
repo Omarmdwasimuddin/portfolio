@@ -7,7 +7,15 @@ import Portfolio from '@/components/Portfolio';
 import ContactUs from '@/components/ContactUs';
 import Blog from '@/components/Blog';
 
-const page = () => {
+async function getData(){
+    let Skill= (await (await fetch(`${process.env.BASE_URL}/api/skill`)).json())['data']
+    let Portfolio= (await (await fetch(`${process.env.BASE_URL}/api/portfolio`)).json())['data']
+    let BlogPost= (await (await fetch(`${process.env.BASE_URL}/api/blogpost`)).json())['data']
+    return {Skill:Skill,Portfolio:Portfolio,BlogPost:BlogPost}
+}
+
+const page = async (props) => {
+    const data=await getData();
 
   return (
     <PlainLayout>
@@ -18,16 +26,16 @@ const page = () => {
         <AboutSection/>
       </div>
       <div>
-        <SkillSection/>
+        <SkillSection skill={data['Skill']}/>
       </div>
       <div>
-        <Portfolio/>
+        <Portfolio portfolio={data['Portfolio']}/>
       </div>
       <div>
         <ContactUs/>
       </div>
       <div>
-        <Blog/>
+        <Blog blogpost={data['BlogPost']}/>
       </div>
     </PlainLayout>
   );
