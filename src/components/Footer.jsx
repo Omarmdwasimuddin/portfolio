@@ -29,7 +29,7 @@ const Footer = () => {
             setData({email:""})
 
             res['status']==="success"?(
-                SuccessToast("Request Success")
+                SuccessToast("Thanks! You'll now get my latest updates.")
             ):(ErrorToast("Email Already Used ! "))
 
 
