@@ -55,7 +55,7 @@ const BlogSection = (props) => {
                   <h3 className="text-xl font-semibold mb-3 text-gray-100">{item['title']}</h3>
                   <p className="text-gray-100 mb-4 text-sm">{item['summary']}</p>
                   <Link
-                    href={item['slug']}
+                    href="#blog"
                     className="inline-block text-green-600 font-semibold hover:underline text-sm"
                   >
                     Read More →
