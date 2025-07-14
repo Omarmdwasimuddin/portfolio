@@ -31,7 +31,9 @@ const AboutSection = () => {
 
         {/* Right - Content */}
         <div data-aos="fade-left" className="flex-1 text-center md:text-left">
-          <h2 className="text-3xl font-bold mb-4 text-gray-950">About Me</h2>
+          <h2 className="text-3xl font-bold mb-4 text-white">
+            About <span className="text-green-500">Me</span>
+          </h2>
           <p className="text-gray-400 mb-6 leading-relaxed max-w-2xl mx-auto md:mx-0">
             I'm <span className="font-semibold text-white">Muhammad Wasim Uddin</span>, a passionate full stack web developer from Bangladesh. I specialize in building dynamic, responsive websites and web apps using modern technologies like <strong>Next.js</strong>, <strong>React</strong>, <strong>Tailwind CSS</strong>, <strong>Prisma</strong>, <strong>MySQL</strong>, <strong>WordPress</strong>, and <strong>Shopify</strong>. I'm also skilled in <strong>SEO</strong> and optimizing websites for better performance and ranking.
           </p>

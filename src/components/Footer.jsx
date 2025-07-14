@@ -70,8 +70,8 @@ const Footer = () => {
         <div className="space-y-5">
           <h3 className="text-lg font-semibold text-white">Navigation</h3>
           <ul className="space-y-3">
-            <li><Link href="#about" className="hover:text-green-500 transition-colors">About us</Link></li>
-            <li><Link href="#contact" className="hover:text-green-500 transition-colors">Contact us</Link></li>
+            <li><Link href="#about" className="hover:text-green-500 transition-colors">About Me</Link></li>
+            <li><Link href="#contact" className="hover:text-green-500 transition-colors">Contact Me</Link></li>
             <li><Link href="#portfolio" className="hover:text-green-500 transition-colors">Projects</Link></li>
             <li><Link href="#blog" className="hover:text-green-500 transition-colors">Recent Post</Link></li>
           </ul>
