@@ -8,7 +8,7 @@ import {
 
 const navItems = [
   { href: '/', icon: <Home className="w-6 h-6" />, label: 'Home' },
-  { href: '#skill', icon: <Layers className="w-6 h-6" />, label: 'Skills' },
+  { href: '#skills', icon: <Layers className="w-6 h-6" />, label: 'Skills' },
   { href: '#about', icon: <User className="w-6 h-6" />, label: 'About' },
   { href: '#portfolio', icon: <Briefcase className="w-6 h-6" />, label: 'Portfolio' },
   { href: '#contact', icon: <Phone className="w-6 h-6" />, label: 'Contact' },
