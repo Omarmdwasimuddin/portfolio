@@ -12,8 +12,7 @@ const navItems = [
   { href: '#about', icon: <User className="w-6 h-6" />, label: 'About' },
   { href: '#portfolio', icon: <Briefcase className="w-6 h-6" />, label: 'Portfolio' },
   { href: '#contact', icon: <Phone className="w-6 h-6" />, label: 'Contact' },
-  { href: '#blog', icon: <BookOpen className="w-6 h-6" />, label: 'Blog' },
-  { href: '/login', icon: <LogIn className="w-6 h-6" />, label: 'Login' },
+  { href: '#blog', icon: <BookOpen className="w-6 h-6" />, label: 'Blog' }
 ];
 
 const Header = () => {
