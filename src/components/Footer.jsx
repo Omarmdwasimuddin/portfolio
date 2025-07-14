@@ -51,7 +51,7 @@ const Footer = () => {
             Welcome to my professional portfolio. Let's build something amazing together!
           </p>
           <div className="flex gap-4 pt-2">
-            <Link href="https://www.facebook.com/wasim.mdwasimuddin" target="_blank">
+            <Link href="https://www.linkedin.com/in/mwasimuddin/" target="_blank">
               <FaFacebookF className="text-lg text-white hover:text-blue-500 transition-colors cursor-pointer" />
             </Link>
             <Link href="https://twitter.com" target="_blank">

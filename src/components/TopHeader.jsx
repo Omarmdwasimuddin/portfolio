@@ -48,7 +48,7 @@ const TopHeader = () => {
           </Link>
           <div className="h-4 w-px bg-gray-600"></div>
 
-          <Link href="https:www.linkedin.com/in/mwasimuddin" target="_blank">
+          <Link href="https://www.linkedin.com/in/mwasimuddin/" target="_blank">
             <FaLinkedinIn className="text-sm text-white cursor-pointer hover:text-blue-600" />
           </Link>
           <div className="h-4 w-px bg-gray-600"></div>
