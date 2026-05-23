@@ -3,82 +3,73 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay } from 'swiper/modules';
-import { motion } from 'framer-motion'; 
-import { FaGithub } from 'react-icons/fa';
-import 'swiper/css';
+import { motion, useAnimationFrame, useMotionValue } from 'framer-motion';
+import { ExternalLink, Github } from 'lucide-react';
 
+const PortfolioSection = ({ portfolio }) => {
+  const baseX = useMotionValue(0);
 
-const PortfolioSection = (props) => {
+  // Auto-scroll logic independent of drag
+  useAnimationFrame((t, delta) => {
+    let moveBy = delta * 0.05;
+    baseX.set(baseX.get() - moveBy);
+    
+    // Reset loop
+    if (baseX.get() <= -1000) {
+      baseX.set(0);
+    }
+  });
+
   return (
-    <motion.section
-      id="portfolio"
-      initial={{ opacity: 0, y: 50 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8, ease: 'easeOut' }}
-      viewport={{ once: true }}
-      className="relative py-16 px-4 overflow-hidden"
-    >
-      <div className="absolute inset-0 -z-10 bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 bg-[length:200%_200%] animate-gradient" />
+    <section id="portfolio" className="relative py-24 px-4 bg-[#030712] text-white overflow-hidden">
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-green-500/10 rounded-full blur-[150px] -z-0" />
 
-      <div className="max-w-6xl mx-auto">
-        <h2 className="text-3xl sm:text-4xl font-bold text-center mb-12 text-white">
-          My <span className="text-green-600">Portfolio</span>
-        </h2>
+      <div className="container mx-auto max-w-6xl relative z-10 mb-16 text-center">
+        <h2 className="text-sm font-mono text-green-500 tracking-widest uppercase mb-2">Showcase</h2>
+        <h3 className="text-4xl sm:text-5xl font-extrabold text-white">Featured Projects & Craftsmanship</h3>
+      </div>
 
-        <Swiper
-          modules={[Autoplay]}
-          spaceBetween={30}
-          slidesPerView={1}
-          autoplay={{
-            delay: 3000,
-            disableOnInteraction: false,
-          }}
-          breakpoints={{
-            640: { slidesPerView: 1 },
-            768: { slidesPerView: 2 },
-            1024: { slidesPerView: 3 },
-          }}
+      {/* Marquee Container */}
+      <div className="relative overflow-hidden w-full cursor-grab active:cursor-grabbing">
+        <motion.div 
+          className="flex gap-8"
+          style={{ x: baseX }}
+          drag="x"
+          dragConstraints={{ left: -2000, right: 0 }}
         >
-          {props.portfolio.map((item,i) => (
-            <SwiperSlide key={i}>
-              <div className="bg-gray-800 rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-all">
-                <div className="relative w-full h-56 overflow-hidden rounded-lg group cursor-pointer">
-                  <Image
-                    src={item['image']}
-                    alt={item['title']}
-                    fill
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                    className="object-cover transition-transform duration-300 ease-in-out group-hover:scale-105 group-hover:brightness-110"
-                  />
+          {[...portfolio, ...portfolio, ...portfolio].map((item, index) => (
+            <div
+              key={index}
+              className="flex-shrink-0 w-[300px] md:w-[350px] bg-white/5 border border-white/10 rounded-3xl overflow-hidden backdrop-blur-md transition-all hover:border-green-500/30 hover:shadow-2xl hover:shadow-green-500/10"
+            >
+              <div className="relative w-full h-48 overflow-hidden">
+                <Image src={item.image} alt={item.title} fill className="object-cover" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#030712] to-transparent opacity-80" />
+              </div>
+              <div className="p-6">
+                <h4 className="text-lg font-bold mb-2 group-hover:text-green-400 transition-colors">{item.title}</h4>
+                <p className="text-gray-400 text-xs mb-4 leading-relaxed line-clamp-2">{item.description}</p>
+                <div className="flex flex-wrap gap-2 mb-6">
+                  {Array.isArray(item.techStack) ? item.techStack.slice(0, 3).map((tech, i) => (
+                    <span key={i} className="text-[9px] font-mono uppercase bg-white/5 px-2 py-1 rounded border border-white/5 text-gray-400">
+                      {tech}
+                    </span>
+                  )) : null}
                 </div>
-                <div className="p-5">
-                  <h3 className="text-xl font-semibold mb-2 text-white">{item['title']}</h3>
-                  <p className="text-gray-400 mb-4 text-sm">{item['description']}</p>
-                  <div className="flex gap-3">
-                    <Link
-                      href={item['liveUrl']}
-                      target="_blank"
-                      className="inline-block bg-green-600 text-white px-4 py-2 rounded-full text-sm hover:bg-green-700 transition"
-                    >
-                      Live Preview
-                    </Link>
-                    <Link
-                      href={item['githubUrl']}
-                      target="_blank"
-                      className="inline-flex items-center gap-1 bg-gray-700 text-white px-4 py-2 rounded-full text-sm hover:bg-gray-800 transition"
-                    >
-                      <FaGithub /> GitHub
-                    </Link>
-                  </div>
+                <div className="flex items-center gap-3">
+                  <Link href={item.liveUrl} target="_blank" className="flex-1 flex items-center justify-center gap-2 bg-green-500 text-gray-950 py-2 rounded-xl font-bold text-xs hover:bg-green-400 transition-colors">
+                    Live <ExternalLink className="w-3 h-3" />
+                  </Link>
+                  <Link href={item.githubUrl} target="_blank" className="p-2.5 bg-white/5 border border-white/10 rounded-xl hover:bg-white/10 transition-colors">
+                    <Github className="w-4 h-4" />
+                  </Link>
                 </div>
               </div>
-            </SwiperSlide>
+            </div>
           ))}
-        </Swiper>
+        </motion.div>
       </div>
-    </motion.section>
+    </section>
   );
 };
 
