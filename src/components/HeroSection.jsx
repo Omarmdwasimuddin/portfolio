@@ -68,7 +68,7 @@ const HeroSection = () => {
   return (
     <section 
       ref={containerRef}
-      className="relative min-h-[90vh] flex items-center overflow-hidden bg-[#030712] pt-32 pb-20 px-4"
+      className="relative min-h-[90vh] flex items-center overflow-hidden bg-[#030712] py-20 px-4 md:pt-32"
     >
       {/* Dynamic Background Elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -133,16 +133,16 @@ const HeroSection = () => {
               Transforming complex ideas into elegant, high-performance web applications. Focused on building scalable solutions with modern technologies and exceptional user experiences.
             </motion.p>
 
-            <motion.div variants={itemVariants} className="flex flex-wrap items-center justify-center lg:justify-start gap-4">
+            <motion.div variants={itemVariants} className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
               <button 
                 onClick={() => document.getElementById('portfolio')?.scrollIntoView({ behavior: 'smooth' })}
-                className="px-8 py-4 bg-white text-gray-950 rounded-2xl font-bold hover:bg-green-500 hover:text-white transition-all duration-300 shadow-[0_0_30px_rgba(255,255,255,0.1)] active:scale-95"
+                className="w-full sm:w-auto px-8 py-4 bg-white text-gray-950 rounded-2xl font-bold hover:bg-green-500 hover:text-white transition-all duration-300 shadow-[0_0_30px_rgba(255,255,255,0.1)] active:scale-95"
               >
                 Explore My Work
               </button>
               <button 
                 onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-                className="px-8 py-4 bg-white/5 border border-white/10 text-white rounded-2xl font-bold hover:bg-white/10 transition-all duration-300 active:scale-95"
+                className="w-full sm:w-auto px-8 py-4 bg-white/5 border border-white/10 text-white rounded-2xl font-bold hover:bg-white/10 transition-all duration-300 active:scale-95"
               >
                 Get in Touch
               </button>
@@ -154,12 +154,12 @@ const HeroSection = () => {
             initial={{ opacity: 0, scale: 0.8, rotate: 5 }}
             animate={{ opacity: 1, scale: 1, rotate: 0 }}
             transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-            className="w-full lg:w-2/5 flex justify-center relative"
+            className="w-full lg:w-2/5 flex justify-center relative scale-90 sm:scale-100"
           >
-            {/* Decorative element behind card */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-gradient-to-br from-green-500/20 to-blue-500/20 rounded-full blur-[80px] -z-10 animate-pulse" />
+            {/* Decorative element behind card - visible only on desktop */}
+            <div className="hidden lg:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-gradient-to-br from-green-500/20 to-blue-500/20 rounded-full blur-[80px] -z-10 animate-pulse" />
             
-            <div className="w-full max-w-[420px] transition-transform duration-500 hover:scale-[1.02]">
+            <div className="w-full max-w-[320px] md:max-w-[420px]">
               <ProfileCard
                 avatarUrl="/Img/Wasim-removebg.png"
                 name="Wasim Uddin Omar"
@@ -171,11 +171,9 @@ const HeroSection = () => {
               />
             </div>
           </motion.div>
-
         </div>
       </div>
       
-      {/* Bottom Gradient Fade */}
       <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#030712] to-transparent z-20" />
     </section>
   );
