@@ -37,7 +37,7 @@ const HeroSection = () => {
           </p>
 
           <Link
-            href="/cv/MdWasimUddin_Resume.pdf"
+            href="https://about-wasim.vercel.app/"
             download
             className="inline-flex items-center bg-green-600 hover:bg-green-700 px-6 py-3 text-white font-semibold rounded-full shadow-md transition-all"
           >
