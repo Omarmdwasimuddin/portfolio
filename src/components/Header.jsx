@@ -105,7 +105,7 @@ const Header = () => {
 
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="md:hidden p-2.5 rounded-xl bg-white/5 border border-white/10 text-white hover:bg-white/10 transition-colors"
+              className="md:hidden p-2.5 rounded-xl bg-white/5 border border-white/10 text-white hover:bg-white/10 transition-colors w-11 h-11 flex items-center justify-center"
             >
               {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
@@ -121,16 +121,16 @@ const Header = () => {
               exit={{ opacity: 0, height: 0, marginTop: 0 }}
               className="md:hidden overflow-hidden bg-gray-900/90 rounded-2xl border border-white/5"
             >
-              <div className="p-4 grid grid-cols-2 gap-3">
+              <div className="p-4 grid grid-cols-3 gap-4">
                 {navItems.map((item, index) => (
                   <Link
                     key={index}
                     href={item.href}
                     onClick={() => setIsOpen(false)}
-                    className="flex items-center gap-3 p-4 bg-white/5 rounded-xl text-gray-300 hover:text-green-500 hover:bg-white/10 transition-all border border-transparent hover:border-green-500/20"
+                    className="flex flex-col items-center justify-center gap-2 p-3 bg-white/5 rounded-xl text-gray-300 hover:text-green-500 hover:bg-white/10 transition-all border border-transparent hover:border-green-500/20"
                   >
-                    <item.icon className="w-5 h-5" />
-                    <span className="font-medium">{item.label}</span>
+                    <item.icon className="w-6 h-6" />
+                    <span className="text-[11px] font-medium tracking-wide">{item.label}</span>
                   </Link>
                 ))}
               </div>
