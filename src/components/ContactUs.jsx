@@ -1,138 +1,88 @@
 'use client';
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import {ErrorToast, IsEmail, SuccessToast} from "@/utility/FormHelper";
-import Button from "@/components/Button";
+import { ErrorToast, IsEmail, SuccessToast } from "@/utility/FormHelper";
+import { Mail, MapPin, Send, Loader2 } from 'lucide-react';
 
 const ContactSection = () => {
+  const [data, setData] = useState({ name: "", email: "", phone: "", message: "" });
+  const [submit, setSubmit] = useState(false);
 
-    let [data,setData]=useState({name:"", email:"", phone:"", message:""})
-    let [submit,setSubmit]=useState(false)
+  const inputOnChange = (name, value) => {
+    setData((prev) => ({ ...prev, [name]: value }));
+  };
 
-    const inputOnChange = (name,value) => {
-      setData((data)=>({
-              ...data,
-              [name]: value
-          }))
+  const formSubmit = async () => {
+    if (IsEmail(data.email)) {
+      ErrorToast("Valid Email Address Required!");
+    } else {
+      setSubmit(true);
+      const options = { method: 'POST', body: JSON.stringify(data) };
+      let res = await (await fetch("/api/contact", options)).json();
+      setSubmit(false);
+      setData({ name: "", email: "", phone: "", message: "" });
+      res['status'] === "success" ? SuccessToast("Thanks! I'll get back to you soon.") : ErrorToast("Something went wrong!");
     }
-
-    const formSubmit=async ()=>{
-        if(IsEmail(data.email)){
-            ErrorToast("Valid Email Address Required!")
-        }else {
-            setSubmit(true);
-            const options={method:'POST', body:JSON.stringify(data)}
-            let res=await (await fetch("/api/contact",options)).json();
-            setSubmit(false);
-            setData({name:"", email:"", phone:"", message:""})
-
-            res['status']==="success"?(
-                SuccessToast("Thanks! I'll get back to you soon.")
-            ):(ErrorToast("Email Already Used ! "))
-
-
-        }
-
-    }
+  };
 
   return (
-    <motion.section
-      id="contact"
-      initial={{ opacity: 0, scale: 0.95 }}
-      whileInView={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 0.8, ease: 'easeOut' }}
-      viewport={{ once: true }}
-      className="bg-gray-900 text-white py-16 px-4"
-    >
-      <div className="max-w-4xl mx-auto">
-        <h2 className="text-3xl sm:text-4xl font-bold text-center mb-12">
-          Get In <span className="text-green-500">Touch</span>
-        </h2>
+    <section id="contact" className="relative py-24 px-4 bg-[#030712] text-white">
+      <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-green-500/5 rounded-full blur-[120px] -z-0" />
 
-        <div className="grid md:grid-cols-2 gap-10">
-          {/* Left Side: Contact Info */}
-          <div>
-            <h3 className="text-2xl font-semibold mb-4">Contact Information</h3>
-            <p className="text-gray-400 mb-4">
-              Feel free to reach out via email or fill out the form. I’m always open to discussing new projects or opportunities.
-            </p>
-            <div className="mb-3">
-              <p className="text-gray-300">📧 Email:</p>
-              <a href="mailto:wasim@example.com" className="text-green-400 hover:underline">
-                mdwasimu015@gmail.com
-              </a>
-            </div>
-            <div className="mb-3">
-              <p className="text-gray-300">📍 Location:</p>
-              <p className="text-gray-400">Dhaka, Bangladesh</p>
+      <motion.div 
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8 }}
+        className="max-w-6xl mx-auto"
+      >
+        <div className="text-center mb-16">
+          <h2 className="text-sm font-mono text-green-500 tracking-widest uppercase mb-2">Let's Connect</h2>
+          <h3 className="text-4xl sm:text-5xl font-extrabold text-white">Ready to bring your project to life?</h3>
+        </div>
+
+        <div className="grid md:grid-cols-2 gap-12 items-start">
+          {/* Contact Info */}
+          <div className="space-y-8">
+            <div className="bg-white/5 p-8 rounded-3xl border border-white/10 backdrop-blur-md">
+              <h4 className="text-2xl font-bold mb-6">Get in touch</h4>
+              <div className="flex items-center gap-4 mb-6 text-gray-400">
+                <div className="p-3 bg-white/5 rounded-full text-green-400"><Mail /></div>
+                <a href="mailto:mdwasimu015@gmail.com" className="hover:text-green-400 transition-colors">mdwasimu015@gmail.com</a>
+              </div>
+              <div className="flex items-center gap-4 text-gray-400">
+                <div className="p-3 bg-white/5 rounded-full text-green-400"><MapPin /></div>
+                <span>Dhaka, Bangladesh</span>
+              </div>
             </div>
           </div>
 
-          {/* Right Side: Contact Form */}
-          <form onSubmit={(e) => { e.preventDefault(); formSubmit(); }} className="space-y-6">
-            <div>
-              <label htmlFor="name" className="block text-sm font-medium mb-1">
-                Name
-              </label>
-              <input
-                value={data.name} onChange={(e)=>{inputOnChange('name',e.target.value)}}
-                type="text"
-                id="name"
-                className="w-full px-4 py-2 rounded-md bg-gray-800 text-white border border-gray-700 focus:outline-none focus:ring-2 focus:ring-green-500"
-                placeholder="Your Name"
-                required
-              />
+          {/* Form */}
+          <motion.form 
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.2, duration: 0.8 }}
+            onSubmit={(e) => { e.preventDefault(); formSubmit(); }} 
+            className="space-y-4 bg-white/5 p-8 rounded-3xl border border-white/10 backdrop-blur-md"
+          >
+            <div className="grid grid-cols-1 gap-4">
+              <input value={data.name} onChange={(e) => inputOnChange('name', e.target.value)} type="text" placeholder="Your Name" className="w-full px-6 py-4 rounded-xl bg-white/5 border border-white/10 focus:border-green-500/50 outline-none transition-colors" required />
+              <input value={data.email} onChange={(e) => inputOnChange('email', e.target.value)} type="email" placeholder="Your Email" className="w-full px-6 py-4 rounded-xl bg-white/5 border border-white/10 focus:border-green-500/50 outline-none transition-colors" required />
+              <input value={data.phone} onChange={(e) => inputOnChange('phone', e.target.value)} type="tel" placeholder="Phone Number" className="w-full px-6 py-4 rounded-xl bg-white/5 border border-white/10 focus:border-green-500/50 outline-none transition-colors" required />
+              <textarea value={data.message} onChange={(e) => inputOnChange('message', e.target.value)} rows="4" placeholder="Your Message" className="w-full px-6 py-4 rounded-xl bg-white/5 border border-white/10 focus:border-green-500/50 outline-none transition-colors" required></textarea>
             </div>
-            <div>
-              <label htmlFor="email" className="block text-sm font-medium mb-1">
-                Email
-              </label>
-              <input
-                value={data.email} onChange={(e)=>{inputOnChange('email',e.target.value)}}
-                type="email"
-                id="email"
-                className="w-full px-4 py-2 rounded-md bg-gray-800 text-white border border-gray-700 focus:outline-none focus:ring-2 focus:ring-green-500"
-                placeholder="Your Email"
-                required
-              />
-            </div>
-              <div>
-                <label htmlFor="phone" className="block text-sm font-medium mb-1">
-                  Phone
-                </label>
-                <input
-                value={data.phone} onChange={(e)=>{inputOnChange('phone',e.target.value)}}
-                type="tel"
-                id="phone"
-                className="w-full px-4 py-2 rounded-md bg-gray-800 text-white border border-gray-700 focus:outline-none focus:ring-2 focus:ring-green-500"
-                placeholder="Your Phone Number"
-                required
-                />
-              </div>
-            <div>
-              <label htmlFor="message" className="block text-sm font-medium mb-1">
-                Message
-              </label>
-              <textarea
-                value={data.message} onChange={(e)=>{inputOnChange('message',e.target.value)}}
-                id="message"
-                rows="4"
-                className="w-full px-4 py-2 rounded-md bg-gray-800 text-white border border-gray-700 focus:outline-none focus:ring-2 focus:ring-green-500"
-                placeholder="Your Message"
-                required
-              ></textarea>
-            </div>
-            <Button
-             onClick={formSubmit} submit={submit} text="Submit"
+            
+            <button
+              disabled={submit}
               type="submit"
-              className="bg-green-600 hover:bg-green-700 transition-colors px-6 py-3 rounded-full text-white font-semibold"
+              className="w-full flex items-center justify-center gap-2 bg-green-500 hover:bg-green-400 text-gray-950 py-4 rounded-xl font-bold transition-all shadow-[0_0_20px_rgba(34,197,94,0.3)] disabled:opacity-50"
             >
-              Send Now
-            </Button>
-          </form>
+              {submit ? <Loader2 className="animate-spin" /> : <>Send Message <Send className="w-4 h-4" /></>}
+            </button>
+          </motion.form>
         </div>
-      </div>
-    </motion.section>
+      </motion.div>
+    </section>
   );
 };
 

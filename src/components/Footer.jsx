@@ -1,116 +1,104 @@
-'use client'
-import React, {useState} from 'react';
-import Image from 'next/image';
+'use client';
+import React, { useState } from 'react';
 import Link from 'next/link';
+import { motion } from 'framer-motion';
 import { FaFacebookF, FaTwitter, FaLinkedinIn, FaGithub } from 'react-icons/fa';
-import {ErrorToast, IsEmail, SuccessToast} from "@/utility/FormHelper";
-import Button from "@/components/Button";
+import { ErrorToast, IsEmail, SuccessToast } from "@/utility/FormHelper";
+import { Mail, ArrowRight, Loader2 } from 'lucide-react';
 
 const Footer = () => {
+  const [data, setData] = useState({ email: "" });
+  const [submit, setSubmit] = useState(false);
 
-    let [data,setData]=useState({email:""})
-    let [submit,setSubmit]=useState(false)
-
-    const inputOnChange = (name,value) => {
-      setData((data)=>({
-              ...data,
-              [name]: value
-          }))
+  const formSubmit = async () => {
+    if (IsEmail(data.email)) {
+      ErrorToast("Valid Email Address Required!");
+    } else {
+      setSubmit(true);
+      const options = { method: 'POST', body: JSON.stringify(data) };
+      let res = await (await fetch("/api/newsletter", options)).json();
+      setSubmit(false);
+      setData({ email: "" });
+      res['status'] === "success" 
+        ? SuccessToast("Thanks for subscribing!") 
+        : ErrorToast("Email Already Subscribed!");
     }
+  };
 
-    const formSubmit=async ()=>{
-        if(IsEmail(data.email)){
-            ErrorToast("Valid Email Address Required!")
-        }else {
-            setSubmit(true);
-            const options={method:'POST', body:JSON.stringify(data)}
-            let res=await (await fetch("/api/newsletter",options)).json();
-            setSubmit(false);
-            setData({email:""})
-
-            res['status']==="success"?(
-                SuccessToast("Thanks! You'll now get my latest updates.")
-            ):(ErrorToast("Email Already Used ! "))
-
-
-        }
-
-    }
+  const socialLinks = [
+    { icon: FaFacebookF, href: "https://www.facebook.com/wasim.mdwasimuddin" },
+    { icon: FaTwitter, href: "https://twitter.com" },
+    { icon: FaLinkedinIn, href: "https://www.linkedin.com/in/mwasimuddin/" },
+    { icon: FaGithub, href: "https://github.com/Omarmdwasimuddin" }
+  ];
 
   return (
-    <footer className="bg-gray-900 text-gray-300 pt-16 pb-8 px-6">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-        
-        {/* Column 1: Brand Info */}
-        <div className="space-y-5">
-          <div className="flex items-center">
-            
-            <h2 className="text-xl font-bold text-white">Md Wasim Uddin Omar</h2>
+    <footer className="relative bg-[#030712] border-t border-white/5 pt-20 pb-8 px-4">
+      <div className="container mx-auto max-w-6xl">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+          
+          {/* Brand Info */}
+          <div className="space-y-6">
+            <h2 className="text-2xl font-bold text-white">Wasim.</h2>
+            <p className="text-sm text-gray-400 leading-relaxed">
+              Building high-performance digital experiences with passion and precision. Let's create something extraordinary.
+            </p>
+            <div className="flex gap-4">
+              {socialLinks.map((link, i) => (
+                <Link key={i} href={link.href} target="_blank" className="p-3 bg-white/5 rounded-full hover:bg-green-500 hover:text-gray-950 transition-all">
+                  <link.icon className="w-4 h-4" />
+                </Link>
+              ))}
+            </div>
           </div>
-          <p className="text-sm">
-            Welcome to my professional portfolio. Let's build something amazing together!
-          </p>
-          <div className="flex gap-4 pt-2">
-            <Link href="https://www.facebook.com/wasim.mdwasimuddin" target="_blank">
-              <FaFacebookF className="text-lg text-white hover:text-blue-500 transition-colors cursor-pointer" />
-            </Link>
-            <Link href="https://twitter.com" target="_blank">
-              <FaTwitter className="text-lg text-white hover:text-blue-400 transition-colors cursor-pointer" />
-            </Link>
-            <Link href="https://www.linkedin.com/in/mwasimuddin/" target="_blank">
-              <FaLinkedinIn className="text-lg text-white hover:text-blue-600 transition-colors cursor-pointer" />
-            </Link>
-            <Link href="https://github.com/Omarmdwasimuddin" target="_blank">
-              <FaGithub className="text-lg text-white hover:text-gray-400 transition-colors cursor-pointer" />
-            </Link>
+
+          {/* Links */}
+          <div className="space-y-6">
+            <h3 className="text-lg font-bold text-white">Navigate</h3>
+            <ul className="space-y-3 text-sm text-gray-400">
+              {['About', 'Portfolio', 'Blog', 'Contact'].map(link => (
+                <li key={link}><Link href={`#${link.toLowerCase()}`} className="hover:text-green-400 transition-colors">{link}</Link></li>
+              ))}
+            </ul>
           </div>
-        </div>
 
-        {/* Column 2: Navigation */}
-        <div className="space-y-5">
-          <h3 className="text-lg font-semibold text-white">Navigation</h3>
-          <ul className="space-y-3">
-            <li><Link href="#about" className="hover:text-green-500 transition-colors">About Me</Link></li>
-            <li><Link href="#contact" className="hover:text-green-500 transition-colors">Contact Me</Link></li>
-            <li><Link href="#portfolio" className="hover:text-green-500 transition-colors">Projects</Link></li>
-            <li><Link href="#blog" className="hover:text-green-500 transition-colors">Recent Post</Link></li>
-          </ul>
-        </div>
+          {/* Services */}
+          <div className="space-y-6">
+            <h3 className="text-lg font-bold text-white">Services</h3>
+            <ul className="space-y-3 text-sm text-gray-400">
+              <li>Next.js Development</li>
+              <li>Shopify & WordPress</li>
+              <li>SEO Audit</li>
+            </ul>
+          </div>
 
-        {/* Column 3: Services */}
-        <div className="space-y-5">
-          <h3 className="text-lg font-semibold text-white">All Services</h3>
-          <ul className="space-y-3">
-            <li><Link href="/" className="hover:text-green-500 transition-colors">Next.js Development</Link></li>
-            <li><Link href="/" className="hover:text-green-500 transition-colors">Shopify Design & Development</Link></li>
-            <li><Link href="/" className="hover:text-green-500 transition-colors">WordPress Design & Development</Link></li>
-            <li><Link href="/" className="hover:text-green-500 transition-colors">SEO Optimization & Audit</Link></li>
-          </ul>
-        </div>
-
-        {/* Column 4: Newsletter */}
-        <div className="space-y-5">
-          <h3 className="text-lg font-semibold text-white">Newsletter</h3>
-          <p className="text-sm">
-            Subscribe to get updates about my latest projects and articles.
-          </p>
-          <div className="flex flex-col gap-3">
-            <input 
-              value={data.email} onChange={(e)=>{inputOnChange('email',e.target.value)}}
-              type="email" 
-              placeholder="Email Address *" 
-              className="bg-gray-800 text-white px-4 py-2 rounded-sm focus:outline-none focus:ring-1 focus:ring-green-500"
-            />
-            <Button onClick={formSubmit} submit={submit} text="Submit" className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-sm transition-colors">
-              Subscribe
-            </Button>
+          {/* Newsletter */}
+          <div className="space-y-6">
+            <h3 className="text-lg font-bold text-white">Newsletter</h3>
+            <div className="relative">
+              <Mail className="absolute left-3 top-3.5 w-5 h-5 text-gray-500" />
+              <input 
+                value={data.email} 
+                onChange={(e) => setData({email: e.target.value})}
+                type="email" 
+                placeholder="Enter email" 
+                className="w-full bg-white/5 border border-white/10 rounded-xl py-3 pl-10 pr-4 text-sm focus:border-green-500 outline-none"
+              />
+            </div>
+            <button 
+              onClick={formSubmit}
+              disabled={submit}
+              className="w-full bg-green-500 text-gray-950 py-3 rounded-xl font-bold text-sm hover:bg-green-400 flex items-center justify-center gap-2 transition-all"
+            >
+              {submit ? <Loader2 className="animate-spin" /> : <>Subscribe <ArrowRight className="w-4 h-4" /></>}
+            </button>
           </div>
         </div>
-      </div>
 
-      {/* Copyright Section */}
-      <div className="border-t border-gray-800 mt-12 pt-6 text-center text-sm">
-        <p>Copyright © {new Date().getFullYear()} Md Wasim Uddin. All rights reserved.</p>
+        {/* Copyright */}
+        <div className="border-t border-white/5 pt-8 text-center text-xs text-gray-500">
+          <p>© {new Date().getFullYear()} Md Wasim Uddin Omar. All Rights Reserved.</p>
+        </div>
       </div>
     </footer>
   );
