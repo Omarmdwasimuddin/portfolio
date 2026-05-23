@@ -1,7 +1,6 @@
 'use client';
 
 import React from 'react';
-import Link from 'next/link';
 import { FaDownload } from 'react-icons/fa';
 import { TypeAnimation } from 'react-type-animation';
 import ProfileCard from '@/components/ProfileCard';
@@ -36,13 +35,15 @@ const HeroSection = () => {
             I create high-performance websites using modern tech stacks like Next.js, Tailwind CSS, and Prisma with clean UI/UX and optimized SEO.
           </p>
 
-          <Link
+          <a
             href="https://about-wasim.vercel.app/"
-            download
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-flex items-center bg-green-600 hover:bg-green-700 px-6 py-3 text-white font-semibold rounded-full shadow-md transition-all"
           >
-            <FaDownload className="mr-2" /> Download CV
-          </Link>
+            <FaDownload className="mr-2" />
+            Visit CV
+          </a>
         </div>
 
         {/* Right Content - ProfileCard */}
@@ -51,7 +52,7 @@ const HeroSection = () => {
             <ProfileCard
               avatarUrl="/Img/Wasim-removebg.png"
               iconUrl="/iconPattern.jpg"
-              grainUrl = "/IconPattern.png"
+              grainUrl="/IconPattern.png"
               name="Wasim Uddin Omar"
               title="Full Stack Developer"
               handle="omarmdwasimuddin"
