@@ -140,7 +140,7 @@ const Header = () => {
                   target="_blank"
                   className="flex items-center justify-center gap-2 w-full bg-green-500 text-gray-950 p-4 rounded-xl font-bold"
                 >
-                  Visit Portfolio
+                  Resume
                   <ExternalLink className="w-4 h-4" />
                 </Link>
               </div>
