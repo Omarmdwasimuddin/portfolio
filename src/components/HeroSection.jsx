@@ -161,7 +161,7 @@ const HeroSection = () => {
             
             <div className="w-full max-w-[320px] md:max-w-[420px]">
               <ProfileCard
-                avatarUrl="/Img/Wasim-removebg.png"
+                avatarUrl="/Wasim-ai-removebg-preview.png"
                 name="Wasim Uddin Omar"
                 title="Full Stack Developer"
                 handle="omarmdwasimuddin"
