@@ -89,7 +89,7 @@ const HeroSection = () => {
       </div>
 
       <div className="container mx-auto max-w-7xl relative z-10">
-        <div className="flex flex-col-reverse lg:flex-row items-center justify-between gap-12 lg:gap-20">
+        <div className="flex flex-col-reverse lg:flex-row items-center justify-center lg:justify-between gap-12 lg:gap-20">
           
           {/* Left Content */}
           <motion.div 
