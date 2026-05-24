@@ -6,6 +6,7 @@ import SkillSection from '@/components/SkillSection';
 import Portfolio from '@/components/Portfolio';
 import ContactUs from '@/components/ContactUs';
 import Blog from '@/components/Blog';
+import ScrollReveal from '@/components/ScrollReveal';
 
 async function getData() {
   const [skillRes, portfolioRes, blogPostRes] = await Promise.all([
@@ -29,24 +30,24 @@ const page = async (props) => {
 
   return (
     <PlainLayout>
-      <div>
+      <ScrollReveal>
         <HeroSection/>
-      </div>
-      <div>
+      </ScrollReveal>
+      <ScrollReveal>
         <AboutSection/>
-      </div>
-      <div>
+      </ScrollReveal>
+      <ScrollReveal>
         <SkillSection skill={data['Skill']}/>
-      </div>
-      <div>
+      </ScrollReveal>
+      <ScrollReveal>
         <Portfolio portfolio={data['Portfolio']}/>
-      </div>
-      <div>
+      </ScrollReveal>
+      <ScrollReveal>
         <ContactUs/>
-      </div>
-      <div>
+      </ScrollReveal>
+      <ScrollReveal>
         <Blog blogpost={data['BlogPost']}/>
-      </div>
+      </ScrollReveal>
     </PlainLayout>
   );
 };
