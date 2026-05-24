@@ -154,12 +154,12 @@ const HeroSection = () => {
             initial={{ opacity: 0, scale: 0.8, rotate: 5 }}
             animate={{ opacity: 1, scale: 1, rotate: 0 }}
             transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-            className="w-full lg:w-2/5 flex justify-center relative scale-90 sm:scale-100"
+            className="w-full lg:w-2/5 flex justify-center lg:justify-end relative"
           >
             {/* Decorative element behind card - visible only on desktop */}
             <div className="hidden lg:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-gradient-to-br from-green-500/20 to-blue-500/20 rounded-full blur-[80px] -z-10 animate-pulse" />
             
-            <div className="w-full max-w-[320px] md:max-w-[420px]">
+            <div className="w-full max-w-[280px] sm:max-w-[320px] md:max-w-[420px] mx-auto">
               <ProfileCard
                 avatarUrl="/Wasim-ai-removebg-preview.png"
                 name="Wasim Uddin Omar"
