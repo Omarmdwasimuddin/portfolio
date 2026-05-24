@@ -63,7 +63,7 @@ const BlogSection = ({ blogpost }) => {
                 <h4 className="text-lg font-bold mb-3 group-hover:text-green-400 transition-colors leading-tight">
                   {item.title}
                 </h4>
-                <p className="text-gray-400 text-xs mb-6 leading-relaxed line-clamp-3 flex-1">
+                <p className="text-gray-400 text-xs mb-6 leading-relaxed line-clamp-3 flex-1 text-justify">
                   {item.summary}
                 </p>
                 

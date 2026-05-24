@@ -48,7 +48,7 @@ const PortfolioSection = ({ portfolio }) => {
               </div>
               <div className="p-6">
                 <h4 className="text-lg font-bold mb-2 group-hover:text-green-400 transition-colors">{item.title}</h4>
-                <p className="text-gray-400 text-xs mb-4 leading-relaxed line-clamp-2">{item.description}</p>
+                <p className="text-gray-400 text-xs mb-4 leading-relaxed line-clamp-2 text-justify">{item.description}</p>
                 <div className="flex flex-wrap gap-2 mb-6">
                   {Array.isArray(item.techStack) ? item.techStack.slice(0, 3).map((tech, i) => (
                     <span key={i} className="text-[9px] font-mono uppercase bg-white/5 px-2 py-1 rounded border border-white/5 text-gray-400">

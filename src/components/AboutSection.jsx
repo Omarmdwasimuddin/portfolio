@@ -64,7 +64,7 @@ const AboutSection = () => {
                 Driving innovation through <br />
                 <span className="text-green-500">clean code & strategy</span>
               </h2>
-              <p className="text-gray-400 text-lg leading-relaxed">
+              <p className="text-gray-400 text-lg leading-relaxed text-justify">
                 I am a passionate full stack developer from Bangladesh, focused on building dynamic, scalable, and user-centric web applications. My expertise lies in blending cutting-edge technology with thoughtful UX/UI to solve real-world problems.
               </p>
             </div>

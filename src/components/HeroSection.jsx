@@ -129,7 +129,7 @@ const HeroSection = () => {
               />
             </motion.div>
 
-            <motion.p variants={itemVariants} className="text-gray-400 text-lg leading-relaxed mb-10 max-w-xl mx-auto lg:mx-0">
+            <motion.p variants={itemVariants} className="text-gray-400 text-lg leading-relaxed mb-10 max-w-xl mx-auto lg:mx-0 text-justify">
               Transforming complex ideas into elegant, high-performance web applications. Focused on building scalable solutions with modern technologies and exceptional user experiences.
             </motion.p>
 
