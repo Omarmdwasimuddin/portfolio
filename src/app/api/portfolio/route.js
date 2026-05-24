@@ -1,10 +1,9 @@
-import { PrismaClient } from "@/generated/prisma";
+import prisma from "@/utility/prisma";
 import { NextResponse } from "next/server";
 
 // GET all portfolio items
 export async function GET(req) {
   try {
-    const prisma = new PrismaClient();
     const result = await prisma.portfolio.findMany({
       select: {
         title: true,
@@ -25,8 +24,6 @@ export async function GET(req) {
 export async function POST(req) {
   try {
     const data = await req.json();
-    const prisma = new PrismaClient();
-
     const result = await prisma.portfolio.create({
       data: data,
     });
@@ -51,8 +48,6 @@ export async function PUT(req) {
     }
 
     const data = await req.json();
-    const prisma = new PrismaClient();
-
     const result = await prisma.portfolio.update({
       where: { id },
       data: data,
@@ -77,7 +72,6 @@ export async function DELETE(req) {
       });
     }
 
-    const prisma = new PrismaClient();
     const result = await prisma.portfolio.delete({
       where: { id },
     });

@@ -38,7 +38,7 @@ const BlogSection = ({ blogpost }) => {
           drag="x"
           dragConstraints={{ left: -2000, right: 0 }}
         >
-          {[...blogpost, ...blogpost, ...blogpost].map((item, i) => (
+          {Array.isArray(blogpost) && [...blogpost, ...blogpost, ...blogpost].map((item, i) => (
             <div
               key={i}
               className="flex-shrink-0 w-[300px] md:w-[350px] bg-white/5 border border-white/10 rounded-3xl overflow-hidden backdrop-blur-md transition-all hover:border-green-500/30 hover:shadow-2xl hover:shadow-green-500/10 flex flex-col"

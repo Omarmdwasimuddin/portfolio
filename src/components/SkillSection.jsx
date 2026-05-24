@@ -63,7 +63,7 @@ const SkillSection = ({ skill }) => {
           viewport={{ once: true, amount: 0.2 }}
           className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6"
         >
-          {skill.map((item, index) => (
+          {Array.isArray(skill) && skill.map((item, index) => (
             <motion.div
               key={index}
               variants={itemVariants}

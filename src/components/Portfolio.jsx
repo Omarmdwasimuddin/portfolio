@@ -37,7 +37,7 @@ const PortfolioSection = ({ portfolio }) => {
           drag="x"
           dragConstraints={{ left: -2000, right: 0 }}
         >
-          {[...portfolio, ...portfolio, ...portfolio].map((item, index) => (
+          {Array.isArray(portfolio) && [...portfolio, ...portfolio, ...portfolio].map((item, index) => (
             <div
               key={index}
               className="flex-shrink-0 w-[300px] md:w-[350px] bg-white/5 border border-white/10 rounded-3xl overflow-hidden backdrop-blur-md transition-all hover:border-green-500/30 hover:shadow-2xl hover:shadow-green-500/10"

@@ -1,10 +1,9 @@
 import { NextResponse } from 'next/server';
-import { PrismaClient } from '@/generated/prisma';
+import prisma from '@/utility/prisma';
 
 // GET: Get all skills
 export async function GET(req) {
   try {
-    const prisma = new PrismaClient();
     const result = await prisma.skill.findMany({
       select: { name: true, image: true },
     });
@@ -19,8 +18,6 @@ export async function GET(req) {
 export async function POST(req) {
   try {
     const data = await req.json();
-    const prisma = new PrismaClient();
-
     const result = await prisma.skill.create({
       data: data,
     });
@@ -45,8 +42,6 @@ export async function PUT(req) {
     }
 
     const data = await req.json();
-    const prisma = new PrismaClient();
-
     const result = await prisma.skill.update({
       where: { id },
       data: data,
@@ -71,7 +66,6 @@ export async function DELETE(req) {
       });
     }
 
-    const prisma = new PrismaClient();
     const result = await prisma.skill.delete({
       where: { id },
     });

@@ -1,4 +1,4 @@
-import { PrismaClient } from "@/generated/prisma";
+import prisma from "@/utility/prisma";
 import { NextResponse } from "next/server";
 
 
@@ -6,7 +6,6 @@ import { NextResponse } from "next/server";
 export async function GET(req,res) {
     
     try {
-    const prisma = new PrismaClient();
     const result = await prisma.blogPost.findMany({
         select:{title:true,summary:true,data:true,image:true,slug:true}
     })
@@ -22,7 +21,6 @@ export async function POST(req,res) {
     
     try {
     const resBody = await req.json();
-    const prisma = new PrismaClient();
     const result = await prisma.blogPost.create({
         data:resBody
     })
@@ -46,7 +44,6 @@ export async function DELETE(req) {
       });
     }
 
-    const prisma = new PrismaClient();
     const result = await prisma.blogPost.delete({
       where: { id },
     });
@@ -70,8 +67,6 @@ export async function PUT(req) {
     }
 
     const updateData = await req.json();
-    const prisma = new PrismaClient();
-
     const result = await prisma.blogPost.update({
       where: { id },
       data: updateData,
