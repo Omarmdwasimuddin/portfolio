@@ -68,7 +68,7 @@ const HeroSection = () => {
   return (
     <section 
       ref={containerRef}
-      className="relative min-h-[90vh] flex items-center overflow-hidden bg-[#030712] py-20 px-4 md:pt-32"
+      className="relative min-h-[90vh] flex items-center overflow-hidden bg-[#030712] py-32 px-4 md:pt-32"
     >
       {/* Dynamic Background Elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
